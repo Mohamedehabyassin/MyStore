@@ -1,0 +1,8 @@
+.container {
+    display: block;
+    text-align: center;
+    justify-content: center;
+    justify-items: center;
+    margin: 20px;
+  }
+  

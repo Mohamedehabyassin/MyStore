@@ -1,0 +1,111 @@
+<div class="contanier">
+  <div class="row">
+    <div *ngIf="cartItems.length === 0">
+      <h1>No products in cart</h1>
+    </div>
+    <div class="col">
+      <div class="container">
+        <div class="card m-5" *ngFor="let item of cartItems">
+          <div class="row g-0">
+            <div class="col-sm-4 position-relative">
+              <img
+                src={{item.thumbnail}}
+                class="card-img fit-cover w-100 h-100"
+                alt="..."
+              />
+            </div>
+            <div class="col-sm-8">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a class="link-dark text-decoration-none" target="_blank">{{
+                    item.title
+                  }}</a>
+                </h5>
+                <span class="badge rounded-pill bg-dark"
+                  >{{ item.price }} $</span
+                >
+              </div>
+              <div class="card-footer text-center text-muted">
+                <label class="m-2">Amount</label
+                ><input
+                  type="number"
+                  class="m-2"
+                  min="1"
+                  [(ngModel)]="item.quantity"
+                  (ngModelChange)="amountChange()"
+                />
+              </div>
+              <div class="card-footer text-center text-muted">
+                <button class="btn btn-danger" (click)="deleteItem(item)">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <form [formGroup]="cartForm!" (ngSubmit)="onSubmit()">
+        <div class="mb-3 w-50">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Full Name</label
+          >
+          <input
+            type="text"
+            id="fname"
+            class="form-control"
+            formControlName="fullname"
+            [(ngModel)]="name"
+            placeholder="(min length 3)"
+          />
+        </div>
+        <div style="color: red;"
+        *ngIf=" cartForm?.get('fullname')?.errors && cartForm?.get('fullname')?.touched">
+       <p>Must only 3-10 Length</p>
+       </div>  
+
+        <div class="mb-3 w-50">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Address</label
+          >
+          <input
+            type="text"
+            required
+            formControlName="address"
+            class="form-control"
+            [(ngModel)]="address"
+            id="a"
+            placeholder="(min length 6)"
+          />
+        </div>
+        <div style="color: red;"
+        *ngIf=" cartForm?.get('address')?.errors && cartForm?.get('address')?.touched">
+       <p>Must only 6-15 Length</p>
+       </div>  
+
+        <div class="mb-3 w-50">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Credit Number</label
+          >
+          <input
+            type="text"
+            required
+            class="form-control"
+            formControlName="creditNumber"
+            [(ngModel)]="creditNumber"
+            id="creditNo"
+            placeholder="(min length 16)"
+          />
+        </div>
+        <div style="color: red;"
+         *ngIf=" cartForm?.get('creditNumber')?.errors && cartForm?.get('creditNumber')?.touched">
+        <p>Must only 16-20 Number</p>
+        </div>  
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+      </form>
+    </div>
+  </div>
+  <h1>---------------------------------</h1>
+  <h1>Total Checkout: {{ totalChechkout }} $</h1>
+</div>

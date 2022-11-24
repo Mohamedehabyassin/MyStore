@@ -1,0 +1,33 @@
+<div class="col m-5">
+  <div class="card" style="width: 20rem">
+    <img
+      src={{product?.thumbnail}}
+      class="card-image-top img-fluid"
+      alt="Product Image"
+    />
+    <div class="card-body">
+      <h5 class="card-title">
+        <a routerLink="details/{{product?.id}}"> {{ product?.title }}</a>
+      </h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <h6 class="list-group-item">{{ product?.price }} $</h6>
+      <select
+        class="select-option w-25 m-auto list-group-item"
+        #mySelect
+        (change)="changeSelectedItem(mySelect.value)"
+      >
+        <option
+          class="option"
+          *ngFor="let option of productNumbers"
+          [value]="option"
+        >
+          {{ option }}
+        </option>
+      </select>
+    </ul>
+    <div class="card-body">
+      <button class="btn btn-primary" (click)="addToCart()">Add to cart</button>
+    </div>
+  </div>
+</div>
